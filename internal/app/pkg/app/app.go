@@ -17,13 +17,11 @@ func New() (*App, error) {
 	a := &App{}
 	a.s = service.New()
 	a.e = endpoint.New(a.s)
-	// Зарегистрируем обработчик для endpoint'а /api/substring
 	http.HandleFunc("/api/substring", a.e.Substring)
 	return a, nil
 }
 
 func (a *App) Run() {
-	// Запустим HTTP-сервер на порту 8080
-	log.Println("HTTP-сервер запущен на порту 8080")
+	log.Println("HTTP-server started on port - 8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

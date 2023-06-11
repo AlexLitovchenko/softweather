@@ -1,7 +1,7 @@
 package endpoint
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
@@ -18,19 +18,15 @@ func New(s Service) *Endpoint {
 	}
 }
 func (e *Endpoint) Substring(w http.ResponseWriter, r *http.Request) {
-	// Прочитаем тело запроса
-	body, err := ioutil.ReadAll(r.Body)
+	body, err := io.ReadAll(r.Body)
 	if err != nil {
-		http.Error(w, "Ошибка чтения запроса", http.StatusInternalServerError)
+		http.Error(w, "Error with reading request", http.StatusInternalServerError)
 		return
 	}
 
-	// Преобразуем полученные данные в строку
 	str := string(body)
 
-	// Найдем самую длинную подстроку
 	substring := e.s.LongestSubstring(str)
 
-	// Отправим ответ клиенту
 	w.Write([]byte(substring))
 }

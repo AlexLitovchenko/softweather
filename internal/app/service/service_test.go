@@ -21,7 +21,7 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 	for _, test := range tests {
 		result := s.LongestSubstring(test.input)
 		if result != test.expected {
-			t.Errorf("Для входных данных %s, ожидается %s, получено %s", test.input, test.expected, result)
+			t.Errorf("Input string- %s, wait- %s, have- %s", test.input, test.expected, result)
 		}
 	}
 }
